@@ -111,7 +111,7 @@ namespace WebShop.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Профиль был успешно обновлён!";
             return RedirectToPage();
         }
     }

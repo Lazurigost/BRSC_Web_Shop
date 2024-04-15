@@ -6,73 +6,42 @@
 <h1>Главная</h1>
 
 <p>
-    @if (User.IsInRole("Admin"))
+    @if (User.Identity.Name == "admin@mail.ru")
     {
         <a asp-action="Create">Добавить</a>
     }
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantityInStock)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Where(p => p.QuantityInStock > 0))
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuantityInStock)
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.ProductID">Детали</a>
-
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.ProductID">Изменить</a>
-                        @*                         <a asp-action="Delete" asp-route-id="@item.ProductID">Delete</a>*@  }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-@if (User.IsInRole("Admin"))
+<div class="card_container">
+    @foreach (var item in Model.Where(p => p.QuantityInStock > 0))
+    {
+        <div class="card_div">
+            <p class="card_text">@Html.DisplayFor(modelItem => item.ProductName)</p>
+            <p class="card_text">@Html.DisplayFor(modelItem => item.Description)</p>
+            <p class="card_text">@Html.DisplayFor(modelItem => item.Price)</p>
+            <p class="card_text">@Html.DisplayFor(modelItem => item.QuantityInStock)</p>
+            <a asp-action="Details" asp-route-id="@item.ProductID" class="btn_border">Детали</a>
+            @if (User.Identity.Name == "admin@mail.ru")
+            {
+            <a asp-action="Edit" asp-route-id="@item.ProductID" class="btn_border">Изменить</a>
+            <a asp-action="Delete" asp-route-id="@item.ProductID" class="delete_btn_border">Удалить товар</a>
+            }
+        </div>
+    }
+</div>
+@if (User.Identity.Name == "admin@mail.ru")
 {
-    <a>Нет в наличии</a>
+    <h1>Список товаров "Нет в наличии"</h1>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductName)
+                    Название
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    Описание
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.QuantityInStock)
+                    Цена
                 </th>
             </tr>
         </thead>
@@ -90,15 +59,13 @@
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.QuantityInStock)
-                    </td>
-                    <td>
                         <a asp-action="Details" asp-route-id="@item.ProductID">Детали</a>
 
-                        @if (User.IsInRole("Admin"))
+                        @if (User.Identity.Name == "admin@mail.ru")
                         {
                             <a asp-action="Edit" asp-route-id="@item.ProductID">Изменить</a>
-                            @*                         <a asp-action="Delete" asp-route-id="@item.ProductID">Delete</a>*@  }
+                                                    <a asp-action="Delete" asp-route-id="@item.ProductID">Удалить</a>
+                        }
                     </td>
                 </tr>
             }

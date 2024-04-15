@@ -19,4 +19,56 @@ html {
 
 body {
   margin-bottom: 60px;
+  
+}
+.card_text{
+    text-align:center;
+}
+.card_container{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    gap: 20px;
+}
+.card_div{
+    width:23%;
+    display: flex;
+    gap:5px;
+    flex-direction: column;
+    border:5px solid black;
+    background-color:wheat;
+    align-items:center;
+    border-radius:50px;
+}
+.btn_border {
+    background-color: dodgerblue;
+    text-align: center;
+    width: 50%;
+    align-self: center;
+    color: white;
+    border: 3px solid black;
+    border-radius: 30px;
+    height: 15%;
+    text-decoration: none;
+    transition: color 0.5s ease 100ms
+}
+.btn_border:hover {
+    color: orange;
+}
+.delete_btn_border {
+    background-color: darkred;
+    text-align: center;
+    width: 50%;
+    align-self: center;
+    color: white;
+    border: 3px solid black;
+    border-radius: 30px;
+    height: 10%;
+    text-decoration: none;
+    transition: color 0.5s ease 100ms;
+    margin-bottom: 10px;
+    transition: color 0.5s ease 100ms
+}
+.delete_btn_border:hover{
+    color:yellow
 }

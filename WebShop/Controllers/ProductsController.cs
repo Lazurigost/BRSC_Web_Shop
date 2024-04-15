@@ -285,7 +285,7 @@ namespace WebShop.Controllers
                 Order order = new Order
                 {
                     UserID = user.Id,
-                    Status = "Pending",
+                    Status = "Ожидает подтверждения",
                     OrderDate = DateTime.UtcNow,
                     TotalAmount = (int)cartItems.Sum(item => item.Quantity * item.Price)//
                 };

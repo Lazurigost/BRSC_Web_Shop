@@ -24,14 +24,13 @@ namespace WebShop.Controllers
         {
             var userId = User.Identity.Name;
 
-            var orders = await _context.Orders.Include(o => o.User).ToListAsync();
+            var orders = await _context.Orders.ToListAsync();
 
              if (User.IsInRole("Admin"))
             {
                 return View(orders);
             }
 
-            orders = orders.Where(o => o.User.Email == userId).ToList();
 
             return View(orders);
         }
@@ -191,9 +190,8 @@ namespace WebShop.Controllers
         }
         public async Task<IActionResult> GetOrdersAsync()
         {
-            var userId = User.Identity.Name;
 
-            var orders = await _context.Orders.Include(o => o.User).ToListAsync();
+            var orders = await _context.Orders.ToListAsync();
 
             return Ok(orders);
         }

@@ -10,16 +10,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                Статус
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
+                Дата заказа
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TotalAmount)
+                Итоговая цена
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                Логин заказчика
             </th>
             <th></th>
         </tr>
@@ -41,11 +41,11 @@
                     @Html.DisplayFor(modelItem => item.User.Email)
                 </td>
                 <td>
-                    @if (User.IsInRole("Admin"))
-                    {
+                    @* @if (User.IsInRole("Admin"))
+                    { *@
                         <a asp-action="Edit" asp-route-id="@item.OrderID">Изменить</a>
-@*                         <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
- *@                 }
+                        <a asp-action="Delete" asp-route-id="@item.OrderID">Удалить</a>
+                 @* } *@
                     <a asp-action="OrderDetails" asp-route-id="@item.OrderID">Детали</a>
 
                 </td>
