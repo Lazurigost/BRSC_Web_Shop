@@ -6,51 +6,20 @@
 
 <h1>Список заказов</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Статус
-            </th>
-            <th>
-                Дата заказа
-            </th>
-            <th>
-                Итоговая цена
-            </th>
-            <th>
-                Логин заказчика
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="card_container">
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalAmount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Email)
-                </td>
-                <td>
-                    @* @if (User.IsInRole("Admin"))
-                    { *@
-                        <a asp-action="Edit" asp-route-id="@item.OrderID">Изменить</a>
-                        <a asp-action="Delete" asp-route-id="@item.OrderID">Удалить</a>
-                 @* } *@
-                    <a asp-action="OrderDetails" asp-route-id="@item.OrderID">Детали</a>
-
-                </td>
-
-            </tr>
+            <div class="card card_div">
+                <h3 class="card_text">Статус: @Html.DisplayFor(modelItem => item.Status)</h3>
+                <h2 class="card_text">Дата оформления заказа: @Html.DisplayFor(modelItem => item.OrderDate) </h2>
+                <h3 class="card_text">Общая стоимость: @Html.DisplayFor(modelItem => item.TotalAmount) Руб.</h3>
+            <a asp-action="OrderDetails" asp-route-id="@item.OrderID" class="btn btn-primary">Детали</a>
+                @if (User.Identity.Name == "admin@mail.ru")
+                {
+                    <a asp-action="Edit" asp-route-id="@item.OrderID" class="btn btn-primary">Редактировать</a>
+                    <a asp-action="Delete" asp-route-id="@item.OrderID" class="btn btn-danger">Удалить</a>
+                }
+                
+            </div>
         }
-    </tbody>
-</table>
+</div>

@@ -7,32 +7,35 @@
 <h1>Удаление</h1>
 
 <h3>Подтвердить удаление?</h3>
-<div>
+
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Название
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
-        <dt class = "col-sm-2">
-            Описание
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            Цена
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-    </dl>
+    <div class="product_card_detail">
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                Описание:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-2">
+                Цена:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Price) Руб.
+            </dd>
+            <dt class="col-sm-2">
+                Осталось на складе:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.QuantityInStock) Штук
+            </dd>
+        </dl>
+    </div>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="ProductID" />
         <input type="submit" value="Удалить" class="btn btn-danger" /> |
         <a asp-action="Index">Вернуться на главную</a>
     </form>
-</div>
+

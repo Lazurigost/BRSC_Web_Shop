@@ -122,17 +122,6 @@ namespace WebShop.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    // Добавление роли пользователю
-                    var roleResult = await _userManager.AddToRoleAsync(user, "User");
-                    if (!roleResult.Succeeded)
-                    {
-                        // Обработка ошибок при добавлении роли
-                        foreach (var error in roleResult.Errors)
-                        {
-                            ModelState.AddModelError(string.Empty, error.Description);
-                        }
-                    }
-
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -161,6 +150,7 @@ namespace WebShop.Areas.Identity.Pages.Account
                 }
             }
 
+            // If we got this far, something failed, redisplay form
             return Page();
         }
 

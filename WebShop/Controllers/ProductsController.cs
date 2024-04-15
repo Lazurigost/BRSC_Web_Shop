@@ -103,7 +103,29 @@ namespace WebShop.Controllers
 
             return RedirectToAction("Cart");
         }
+        [HttpPost]
+        public async Task<IActionResult> IncrementItemQuantity(int productId)
+        {
+            List<CartItem> cartItems = GetCartItemsFromCookie();
+            var item = await _context.Product.FirstOrDefaultAsync(i => i.ProductID == productId);
+            var itemToIncrement = cartItems.FirstOrDefault(item => item.ProductID == productId);
 
+            if (itemToIncrement != null)
+            {
+                if (itemToIncrement.Quantity < item.QuantityInStock)
+                {
+                    itemToIncrement.Quantity++;
+                }
+                else
+                {
+
+                }
+            }
+
+            SaveCartItemsToCookie(cartItems);
+
+            return RedirectToAction("Cart");
+        }
 
         [HttpPost]
         public async Task<IActionResult> AddToCart(int id)
@@ -119,21 +141,27 @@ namespace WebShop.Controllers
             {
                 cart = new List<CartItem>();
             }
-
-            var cartItem = cart.FirstOrDefault(item => item.ProductID == id);
-            if (cartItem == null)
+            if (product.QuantityInStock > 0)
             {
-                cart.Add(new CartItem
+                var cartItem = cart.FirstOrDefault(item => item.ProductID == id);
+                if (cartItem == null)
                 {
-                    ProductID = product.ProductID,
-                    ProductName = product.ProductName,
-                    Price = product.Price,
-                    Quantity = 1
-                });
+                    cart.Add(new CartItem
+                    {
+                        ProductID = product.ProductID,
+                        ProductName = product.ProductName,
+                        Price = product.Price,
+                        Quantity = 1
+                    });
+                }
+                else
+                {
+                    cartItem.Quantity++;
+                }
             }
             else
             {
-                cartItem.Quantity++;
+                return NotFound();
             }
 
             SaveCartItemsToCookie(cart);

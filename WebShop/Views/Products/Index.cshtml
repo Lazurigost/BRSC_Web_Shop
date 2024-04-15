@@ -14,16 +14,16 @@
 <div class="card_container">
     @foreach (var item in Model.Where(p => p.QuantityInStock > 0))
     {
-        <div class="card_div">
-            <p class="card_text">@Html.DisplayFor(modelItem => item.ProductName)</p>
-            <p class="card_text">@Html.DisplayFor(modelItem => item.Description)</p>
-            <p class="card_text">@Html.DisplayFor(modelItem => item.Price)</p>
-            <p class="card_text">@Html.DisplayFor(modelItem => item.QuantityInStock)</p>
-            <a asp-action="Details" asp-route-id="@item.ProductID" class="btn_border">Детали</a>
+        <div class="card card_div">
+            <h1 class="card_text_header">@Html.DisplayFor(modelItem => item.ProductName)</h1>
+            <h3 class="card_text">@Html.DisplayFor(modelItem => item.Description)</h3>
+            <h2 class="card_text" >@Html.DisplayFor(modelItem => item.Price) Руб.</h2>
+            <h3 class="card_text"> Количество на складе: @Html.DisplayFor(modelItem => item.QuantityInStock)</h3>
+            <a asp-action="Details" asp-route-id="@item.ProductID" class="btn btn-primary">Детали</a>
             @if (User.Identity.Name == "admin@mail.ru")
             {
-            <a asp-action="Edit" asp-route-id="@item.ProductID" class="btn_border">Изменить</a>
-            <a asp-action="Delete" asp-route-id="@item.ProductID" class="delete_btn_border">Удалить товар</a>
+                <a asp-action="Edit" asp-route-id="@item.ProductID" class="btn btn-primary">Изменить</a>
+                <a asp-action="Delete" asp-route-id="@item.ProductID" class="btn btn-outline-danger">Удалить товар</a>
             }
         </div>
     }
@@ -31,44 +31,19 @@
 @if (User.Identity.Name == "admin@mail.ru")
 {
     <h1>Список товаров "Нет в наличии"</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Название
-                </th>
-                <th>
-                    Описание
-                </th>
-                <th>
-                    Цена
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Where(p => p.QuantityInStock <= 0))
+    @foreach (var item in Model.Where(p => p.QuantityInStock <= 0))
+    {
+        <div class="card card_div">
+            <h1 class="card_text_header">@Html.DisplayFor(modelItem => item.ProductName)</h1>
+            <h3 class="card_text">@Html.DisplayFor(modelItem => item.Description)</h3>
+            <h2 class="card_text">@Html.DisplayFor(modelItem => item.Price) Руб.</h2>
+            <h3 class="card_text"> Количество на складе: @Html.DisplayFor(modelItem => item.QuantityInStock)</h3>
+            <a asp-action="Details" asp-route-id="@item.ProductID" class="btn btn-primary">Детали</a>
+            @if (User.Identity.Name == "admin@mail.ru")
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.ProductID">Детали</a>
-
-                        @if (User.Identity.Name == "admin@mail.ru")
-                        {
-                            <a asp-action="Edit" asp-route-id="@item.ProductID">Изменить</a>
-                                                    <a asp-action="Delete" asp-route-id="@item.ProductID">Удалить</a>
-                        }
-                    </td>
-                </tr>
+                <a asp-action="Edit" asp-route-id="@item.ProductID" class="btn btn-primary">Изменить</a>
+                <a asp-action="Delete" asp-route-id="@item.ProductID" class="btn btn-outline-danger">Удалить товар</a>
             }
-        </tbody>
-    </table>
+        </div>
+    }
 }
