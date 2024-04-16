@@ -22,7 +22,9 @@ namespace WebShop.Data
         }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
+        public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }
+        
         public async Task Initialize(ApplicationDbContext context)
         {
             // Добавление ролей

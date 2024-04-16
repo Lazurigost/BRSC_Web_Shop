@@ -24,13 +24,13 @@ namespace WebShop.Controllers
         {
             var userId = User.Identity.Name;
 
-            var orders = await _context.Orders.ToListAsync();
+            var orders = await _context.Orders.Include(u => u.User).ToListAsync();
 
-             if (User.IsInRole("Admin"))
+             if (User.Identity.Name == "admin@mail.ru")
             {
                 return View(orders);
             }
-
+             orders = orders.Where(i => i.User.Email == userId).ToList();
 
             return View(orders);
         }

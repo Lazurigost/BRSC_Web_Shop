@@ -11,14 +11,14 @@
         <a asp-action="Create">Добавить</a>
     }
 </p>
-<div class="card_container">
+<div class="card">
     @foreach (var item in Model.Where(p => p.QuantityInStock > 0))
     {
-        <div class="card card_div">
-            <h1 class="card_text_header">@Html.DisplayFor(modelItem => item.ProductName)</h1>
-            <h3 class="card_text">@Html.DisplayFor(modelItem => item.Description)</h3>
-            <h2 class="card_text" >@Html.DisplayFor(modelItem => item.Price) Руб.</h2>
-            <h3 class="card_text"> Количество на складе: @Html.DisplayFor(modelItem => item.QuantityInStock)</h3>
+        <div class="card">
+            <h1 class="card-text">@Html.DisplayFor(modelItem => item.ProductName)</h1>
+            <h3 class="card-text">@Html.DisplayFor(modelItem => item.Description)</h3>
+            <h2 class="card-text" >@Html.DisplayFor(modelItem => item.Price) Руб.</h2>
+            <h3 class="card-text"> Количество на складе: @Html.DisplayFor(modelItem => item.QuantityInStock)</h3>
             <a asp-action="Details" asp-route-id="@item.ProductID" class="btn btn-primary">Детали</a>
             @if (User.Identity.Name == "admin@mail.ru")
             {

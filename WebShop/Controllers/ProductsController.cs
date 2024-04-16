@@ -314,7 +314,7 @@ namespace WebShop.Controllers
                 {
                     UserID = user.Id,
                     Status = "Ожидает подтверждения",
-                    OrderDate = DateTime.UtcNow,
+                    OrderDate = DateTime.UtcNow.AddHours(5) ,
                     TotalAmount = (int)cartItems.Sum(item => item.Quantity * item.Price)//
                 };
 
